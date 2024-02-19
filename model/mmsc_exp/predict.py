@@ -54,7 +54,6 @@ def main(configuration, init_distributed=False, predict=False):
     else:
         trainer.train()
 
-
 def distributed_main(device_id, configuration, predict=False):
     config = configuration.get_config()
     config.device_id = device_id
