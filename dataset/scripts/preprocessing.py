@@ -12,8 +12,8 @@ from collections import defaultdict
 from dataset.lib.face_aligner import face_aligner
 
 
-def parallel_process(fn, n=2):
-    videos = glob.glob('dataset/videos/*')
+def parallel_process(fn, videos_path, n=2):
+    videos = glob.glob(f'{videos_path}*')
     video_split = []
     for i in range(n):
         video_split.append(videos[i:len(videos):n])
@@ -44,7 +44,7 @@ def crop_align_face(videos):
         V = cv2.VideoCapture(video)
 
         for _, row in df.iterrows():
-            
+
             V.set(cv2.CAP_PROP_POS_MSEC, row['frame_timestamp'] * 1e3)
             # Load frame and get dimensions
             _, frame = V.read()
@@ -67,7 +67,7 @@ def crop_align_face(videos):
             active = int(row['label'] == 'SPEAKING_AUDIBLE')
             spkid = row['spkid']
 
-            if aligned_face_crop is not None:          
+            if aligned_face_crop is not None:
                 cv2.imwrite(f'{save_dir}/{u_frame_id}:{active}:{spkid}.jpg', aligned_face_crop)
             else:
                 cv2.imwrite(f'{save_dir}/{u_frame_id}:{active}:{spkid}.jpg', face_crop)
@@ -106,15 +106,15 @@ def split_waves(videos):
             wave = wave[int(mins*sample_rate):int(maxs*sample_rate)]
             wavfile.write(f'dataset/waves/{uid}.wav', sample_rate, wave)
             offsets.append('{} {}\n'.format(os.path.basename(rttm)[:-5], mins))
-            
+
     with open(f'dataset/split/offsets.txt', 'w+') as f:
         f.writelines(offsets)
     shutil.rmtree(f'dataset/.waves')
-                
+
 
 if __name__ == "__main__":
     # extract frame, crop and align faces
-    parallel_process(crop_align_face, n=1)
+    parallel_process(crop_align_face, sys.argv[1], n=1)
 
     # extract audio stream and crop
-    parallel_process(split_waves, n=1)
+    parallel_process(split_waves, sys.argv[1], n=1)
