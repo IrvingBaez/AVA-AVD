@@ -1,4 +1,4 @@
-env_name='ava'
+env_name='ava-avd'
 
 if conda info --envs | grep -q ${env_name}
 then
@@ -46,7 +46,7 @@ export PATH=$CUDA_HOME/bin:$PATH
 # Excecute code.
 export PYTHONPATH=./dataset/third_party/insightface/detection/retinaface
 python_script="$1"
-python3 "$python_script" "$@"
+clsp_grid_wrapper/submit_grid.sh "$python_script" "$@"
 
 # For preprocessing:
 # ./avr_net.sh dataset/scripts/preprocessing.py dataset/videos
