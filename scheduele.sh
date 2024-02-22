@@ -11,6 +11,7 @@ then
   conda activate ${env_name}
 else
   # Create env if it doesn't exists.
+  echo "Creating environment ${env_name}"
   conda create -y -n ${env_name} python=3.7
 
   # Activate env
@@ -22,13 +23,10 @@ else
   gdown '1ZggExiXzl1Uiq8eOYoCnQKQkN0bY1CHi';
   mv R50-0000.params dataset/third_party/insightface/detection/retinaface/
 
-  # In case torch-1.0.0-cp37-cp37m-linux_x86_64.whl is needed:
-  gdown '1SGgqL3gOrAL97flWAwtxdyTs7AkDZbK0'
-  pip3 install torch-1.0.0-cp37-cp37m-linux_x86_64.whl
-
   # Install dependencies
-  conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=9.0 -c pytorch -y
-  pip install mxnet-cu90
+  conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=10.2 -c pytorch -y
+
+  pip install mxnet-cu102
   pip3 install scikit-image
   pip3 install Cython
   pip3 install opencv-python-headless==4.5.1.48
