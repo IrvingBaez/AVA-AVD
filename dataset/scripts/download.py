@@ -6,9 +6,12 @@ def download_videos(save_dir):
         videos = f.readlines()
 
     for i, video in enumerate(videos):
-        print(f'downloading {video}[{i+1}]/[{len(videos)}]')
-        cmd = f'wget -P {save_dir} https://s3.amazonaws.com/ava-dataset/trainval/{video.strip()}'
-        subprocess.call(cmd, shell=True)
+        if os.path.isfile(f'{save_dir}/{video.strip()}'):
+            print(f'Already downloaded {video}[{i+1}]/[{len(videos)}]')
+        else:
+            print(f'downloading {video}[{i+1}]/[{len(videos)}]')
+            cmd = f'wget -P {save_dir} https://s3.amazonaws.com/ava-dataset/trainval/{video.strip()}'
+            subprocess.call(cmd, shell=True)
 
 def download_annotations():
     print('downloading annotaitons...')

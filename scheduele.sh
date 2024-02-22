@@ -1,5 +1,7 @@
 env_name='ava-avd'
 
+source ~/anaconda3/etc/profile.d/conda.sh
+
 if conda info --envs | grep -q ${env_name}
 then
   echo "Environment ${env_name} already exists"
@@ -48,5 +50,8 @@ export PYTHONPATH=./dataset/third_party/insightface/detection/retinaface
 python_script="$1"
 clsp_grid_wrapper/submit_grid.sh "$python_script" "$@"
 
+# For test:
+# ./scheduele.sh clsp_grid_wrapper/test_pytorch.py
+
 # For preprocessing:
-# ./avr_net.sh dataset/scripts/preprocessing.py dataset/videos
+# ./scheduele.sh dataset/scripts/preprocessing.py dataset/videos
