@@ -25,8 +25,9 @@ else
 
   # Install dependencies
   conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=10.2 -c pytorch -y
+  conda install -c conda-forge nccl -y
 
-  pip install mxnet-cu102
+  pip3 install mxnet-cu102
   pip3 install scikit-image
   pip3 install Cython
   pip3 install opencv-python-headless==4.5.1.48
@@ -35,18 +36,20 @@ fi
 
 # At this point, the env with all the necesary libraries is active.
 
-# Prepare CUDA for code execution:
-CONDA_ENV_PATH=$(conda info --envs | grep -Po "${env_name}\K.*" | sed 's: ::g')
-echo ${CONDA_ENV_PATH}
+# Adjustments for CUDA and cuDNN paths:
+# Determine the path to the active conda environment.
+CONDA_ENV_PATH=$(conda info --base)/envs/${env_name}
 
+# Assuming CUDA and cuDNN are installed within the conda environment, set the environment variables.
 export LD_LIBRARY_PATH=${CONDA_ENV_PATH}/lib:$LD_LIBRARY_PATH
 export CUDA_HOME=${CONDA_ENV_PATH}
 export PATH=$CUDA_HOME/bin:$PATH
 
 # Excecute code.
-export PYTHONPATH=./dataset/third_party/insightface/detection/retinaface
-python_script="$1"
-clsp_grid_wrapper/submit_grid.sh "$python_script" "$@"
+export PYTHONPATH=./dataset/third_party/insightface/detection/retinaface:$PYTHONPATH
+
+task_file=$@
+clsp_grid_wrapper/submit_grid.sh $task_file
 
 # For test:
 # ./scheduele.sh clsp_grid_wrapper/test_pytorch.py
