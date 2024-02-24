@@ -12,7 +12,7 @@ then
 else
   # Create env if it doesn't exists.
   echo "Creating environment ${env_name}"
-  conda create -y -n ${env_name} python=3.7
+  conda create -y -n ${env_name} python=3.9
 
   # Activate env
   eval "$(conda shell.bash hook)"
@@ -27,11 +27,17 @@ else
   conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=10.2 -c pytorch -y
   conda install -c conda-forge nccl -y
 
+  pip3 install "setuptools<58.0.0"
   pip3 install mxnet-cu102
   pip3 install scikit-image
   pip3 install Cython
   pip3 install opencv-python-headless==4.5.1.48
+  # pip3 install rcnn
   pip3 install -r requirements.txt
+  pip3 install -r dataset/third_party/insightface/requirements.txt
+
+  cd dataset/third_party/insightface/detection/retinaface/
+  make
 fi
 
 # At this point, the env with all the necesary libraries is active.
