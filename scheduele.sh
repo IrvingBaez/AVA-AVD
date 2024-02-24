@@ -1,6 +1,13 @@
 env_name='ava-avd'
 
-source ~/anaconda3/etc/profile.d/conda.sh
+if [[ -f ~/miniconda3/etc/profile.d/conda.sh ]]; then
+    source ~/miniconda3/etc/profile.d/conda.sh
+elif [[ -f ~/anaconda3/etc/profile.d/conda.sh ]]; then
+    source ~/anaconda3/etc/profile.d/conda.sh
+else
+    echo "Conda not found. Please ensure Miniconda3 or Anaconda3 is installed."
+    exit 1
+fi
 
 if conda info --envs | grep -q ${env_name}
 then
@@ -38,7 +45,7 @@ fi
 
 # Adjustments for CUDA and cuDNN paths:
 # Determine the path to the active conda environment.
-CONDA_ENV_PATH=$(conda info --base)/envs/${env_name}
+CONDA_ENV_PATH=$(conda info --envs | grep -Po "${env_name}\K.*" | sed 's: ::g')
 
 # Assuming CUDA and cuDNN are installed within the conda environment, set the environment variables.
 export LD_LIBRARY_PATH=${CONDA_ENV_PATH}/lib:$LD_LIBRARY_PATH

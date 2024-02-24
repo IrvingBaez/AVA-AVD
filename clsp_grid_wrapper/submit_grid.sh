@@ -8,7 +8,7 @@
 
 
 # Check if  virtual environment is edited in pytorch_run.sh, if not, exit
-check_env_line=$(sed -n '2p' pytorch_run.sh)
+check_env_line=$(sed -n '2p' clsp_grid_wrapper/pytorch_run.sh)
 ref_line="conda activate <YOUR_ENV_NAME>"
 if [ "$check_env_line" = "$ref_line" ]; then
     echo "ERROR: You haven't activated your anaconda env"
