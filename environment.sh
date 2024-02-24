@@ -1,21 +1,14 @@
 env_name='ava-avd'
 
-if [[ -f ~/miniconda3/etc/profile.d/conda.sh ]]; then
-    source ~/miniconda3/etc/profile.d/conda.sh
-elif [[ -f ~/anaconda3/etc/profile.d/conda.sh ]]; then
-    source ~/anaconda3/etc/profile.d/conda.sh
-else
-    echo "Conda not found. Please ensure Miniconda3 or Anaconda3 is installed."
-    exit 1
-fi
+source ~/miniconda3/etc/profile.d/conda.sh
 
 if conda info --envs | grep -q ${env_name}
 then
   echo "Environment ${env_name} already exists"
 
   # If env existis, just activate it
-  eval "$(conda shell.bash hook)"
-  conda activate ${env_name}
+  # eval "$(conda shell.bash hook)"
+  # conda activate ${env_name}
 else
   # Create env if it doesn't exists.
   echo "Creating environment ${env_name}"
@@ -45,18 +38,18 @@ fi
 
 # Adjustments for CUDA and cuDNN paths:
 # Determine the path to the active conda environment.
-CONDA_ENV_PATH=$(conda info --envs | grep -Po "${env_name}\K.*" | sed 's: ::g')
+# CONDA_ENV_PATH=$(conda info --envs | grep -Po "${env_name}\K.*" | sed 's: ::g')
 
 # Assuming CUDA and cuDNN are installed within the conda environment, set the environment variables.
-export LD_LIBRARY_PATH=${CONDA_ENV_PATH}/lib:$LD_LIBRARY_PATH
-export CUDA_HOME=${CONDA_ENV_PATH}
-export PATH=$CUDA_HOME/bin:$PATH
+# export LD_LIBRARY_PATH=${CONDA_ENV_PATH}/lib:$LD_LIBRARY_PATH
+# export CUDA_HOME=${CONDA_ENV_PATH}
+# export PATH=$CUDA_HOME/bin:$PATH
 
 # Excecute code.
-export PYTHONPATH=./dataset/third_party/insightface/detection/retinaface:$PYTHONPATH
+# export PYTHONPATH=./dataset/third_party/insightface/detection/retinaface:$PYTHONPATH
 
-task_file=$@
-clsp_grid_wrapper/submit_grid.sh $task_file
+# task_file=$@
+# clsp_grid_wrapper/submit_grid.sh $task_file
 
 # For test:
 # ./scheduele.sh clsp_grid_wrapper/test_pytorch.py
