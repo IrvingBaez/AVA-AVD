@@ -28,6 +28,7 @@ def crop_align_face(videos):
     colnames = ['video_id','frame_timestamp','entity_box_x1','entity_box_y1','entity_box_x2',
                 'entity_box_y2','label','entity_id', 'spkid']
 
+    print(f'Processing {len(videos)} videos with crop_align_face')
     for video in videos:
         items = video.split('/')
         uid = items[-1].split('.')[0]
@@ -113,6 +114,8 @@ def split_waves(videos):
 
 
 if __name__ == "__main__":
+    videos = glob.glob(f'{sys.argv[1]}*')
+    print(f'Processing {len(videos)} videos in {sys.argv[1]}')
     # extract frame, crop and align faces
     parallel_process(crop_align_face, sys.argv[1], n=1)
 
