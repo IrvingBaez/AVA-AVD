@@ -2,7 +2,7 @@ from collections import namedtuple
 
 from torch.utils import model_zoo
 
-from retinaface.predict_single import Model
+from predict_single import Model
 
 model = namedtuple("model", ["url", "model"])
 
