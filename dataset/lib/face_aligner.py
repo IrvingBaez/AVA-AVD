@@ -3,7 +3,8 @@ sys.path.append('.')
 import cv2, os
 import numpy as np
 from skimage import transform as trans
-from ..third_party.insightface.detection.retinaface.retinaface import RetinaFace
+# from ..third_party.insightface.detection.retinaface.retinaface import RetinaFace
+from ..third_party.retinaface.retinaface.pre_trained_models import get_model
 
 src1 = np.array([[51.642, 50.115], [57.617, 49.990], [35.740, 69.007],
                  [51.157, 89.050], [57.025, 89.702]],
@@ -41,11 +42,11 @@ arcface_src = np.expand_dims(arcface_src, axis=0)
 
 class face_aligner():
 
-    def __init__(self, checkpoint='dataset/third_party/insightface/detection/retinaface/R50', 
+    def __init__(self, checkpoint='dataset/third_party/insightface/detection/retinaface/R50',
                        gpuid=0):
         super().__init__()
-        self.detector = RetinaFace(checkpoint, 0, gpuid, 'net3')
-        
+        self.detector = get_model("resnet50_2020-07-20", max_size=2048)
+
     def estimate_norm(self, lmk, image_size=224, mode='arcface'):
         assert lmk.shape == (5, 2)
         tform = trans.SimilarityTransform()
@@ -78,22 +79,10 @@ class face_aligner():
         warped = cv2.warpAffine(img, M, (image_size, image_size), borderValue=0.0)
         return warped
 
-    def align_face(self, img, scales=[224, 224], thresh=0.8):
+    def align_face(self, img, thresh=0.8):
         img = cv2.resize(img, (224, 224))
-        im_shape = img.shape
-        target_size = scales[0]
-        max_size = scales[1]
-        im_size_min = np.min(im_shape[0:2])
-        im_size_max = np.max(im_shape[0:2])
-        im_scale = float(target_size) / float(im_size_min)
-        if np.round(im_scale * im_size_max) > max_size:
-            im_scale = float(max_size) / float(im_size_max)
-        scales = [im_scale]
-        flip = False
-        faces, landmarks = self.detector.detect(img,
-                                        thresh,
-                                        scales=scales,
-                                        do_flip=flip)
+
+        faces, landmarks = self.detector.predict_jsons(img, thresh)
         faces = faces.mean(axis=0)[None, :]
         landmarks = landmarks.mean(axis=0)[None, :]
 
