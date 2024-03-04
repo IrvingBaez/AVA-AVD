@@ -3,8 +3,6 @@ sys.path.append('.')
 import cv2, os
 import numpy as np
 from skimage import transform as trans
-# from ..third_party.insightface.detection.retinaface.retinaface import RetinaFace
-# from ..third_party.retinaface.retinaface.pre_trained_models import get_model
 from retinaface.pre_trained_models import get_model
 
 src1 = np.array([[51.642, 50.115], [57.617, 49.990], [35.740, 69.007],
@@ -43,10 +41,9 @@ arcface_src = np.expand_dims(arcface_src, axis=0)
 
 class face_aligner():
 
-    def __init__(self, checkpoint='dataset/third_party/insightface/detection/retinaface/R50',
-                       gpuid=0):
+    def __init__(self):
         super().__init__()
-        self.detector = get_model("resnet50_2020-07-20", max_size=2048)
+        self.detector = get_model("resnet50_2020-07-20", max_size=2048, device='gpu')
 
     def estimate_norm(self, lmk, image_size=224, mode='arcface'):
         assert lmk.shape == (5, 2)
