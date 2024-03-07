@@ -43,7 +43,7 @@ class face_aligner():
 
     def __init__(self):
         super().__init__()
-        self.detector = get_model("resnet50_2020-07-20", max_size=2048, device='gpu')
+        self.detector = get_model("resnet50_2020-07-20", max_size=2048, device='cuda')
 
     def estimate_norm(self, lmk, image_size=224, mode='arcface'):
         assert lmk.shape == (5, 2)
