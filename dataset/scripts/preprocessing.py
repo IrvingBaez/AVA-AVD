@@ -12,8 +12,8 @@ from collections import defaultdict
 from dataset.lib.face_aligner import face_aligner
 
 
-def parallel_process(fn, videos_path, n=2):
-    videos = glob.glob(f'{videos_path}*')
+def parallel_process(fn, dataset_path, n=2):
+    videos = glob.glob(f'{dataset_path}/videos/*')
     video_split = []
     for i in range(n):
         video_split.append(videos[i:len(videos):n])
@@ -32,7 +32,7 @@ def crop_align_face(videos):
     for video in videos:
         items = video.split('/')
         uid = items[-1].split('.')[0]
-        tracks = f'dataset/tracks/{uid}-activespeaker.csv'
+        tracks = f'{dataset_path}/tracks/{uid}-activespeaker.csv'
         if not os.path.exists(tracks):
             continue
         print(f'{video} tracklet not found')
@@ -86,7 +86,7 @@ def split_waves(videos):
         cmd = f'ffmpeg -y -i {video} -qscale:a 0 -ac 1 -vn -threads 6 -ar 16000 dataset/.waves/{uid}.wav -loglevel panic'
         subprocess.call(cmd, shell=True)
 
-        rttms = glob.glob(f'dataset/rttms/{uid}*.rttm')
+        rttms = glob.glob(f'{dataset_path}/rttms/{uid}*.rttm')
         for rttm in sorted(rttms):
             mins = 1e9
             maxs = -1
@@ -113,11 +113,11 @@ def split_waves(videos):
     shutil.rmtree(f'dataset/.waves')
 
 
+dataset_path = sys.argv[1]
+
 if __name__ == "__main__":
-    videos = glob.glob(f'{sys.argv[1]}*')
-    print(f'Processing {len(videos)} videos in {sys.argv[1]}')
     # extract frame, crop and align faces
-    parallel_process(crop_align_face, sys.argv[1], n=1)
+    parallel_process(crop_align_face, dataset_path, n=1)
 
     # extract audio stream and crop
-    parallel_process(split_waves, sys.argv[1], n=1)
+    parallel_process(split_waves, dataset_path, n=1)
