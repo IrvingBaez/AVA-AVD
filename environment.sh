@@ -31,11 +31,13 @@ conda install -c conda-forge nccl -y
 pip3 install "setuptools<58.0.0"
 pip3 install mxnet-cu102
 pip3 install scikit-image
+pip install retinaface-pytorch
 # pip3 install Cython
 # pip3 install opencv-python-headless==4.5.1.48
 # pip3 install --upgrade setuptools wheel
 # pip3 install -r dataset/third_party/insightface/requirements.txt
 pip3 install -r requirements.txt
+pip install opencv-python-headless==4.1.2.30
 
 # Build retinaface
 # cd dataset/third_party/insightface/detection/retinaface/
