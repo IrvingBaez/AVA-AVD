@@ -82,6 +82,7 @@ class face_aligner():
         img = cv2.resize(img, (224, 224))
 
         predictions = self.detector.predict_jsons(img, thresh)
+        print(predictions)
         faces = [prediction['bbox'] for prediction in predictions]
         landmarks = [prediction['landmarks'] for prediction in predictions]
 
