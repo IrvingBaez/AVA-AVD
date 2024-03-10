@@ -32,7 +32,7 @@ def crop_align_face(videos):
     for video in videos:
         items = video.split('/')
         uid = items[-1].split('.')[0]
-        tracks = f'{dataset_path}/tracks/{uid}-activespeaker.csv'
+        tracks = f'dataset/tracks/{uid}-activespeaker.csv'
         if not os.path.exists(tracks):
             continue
         print(f'{video} tracklet not found')
@@ -86,7 +86,7 @@ def split_waves(videos):
         cmd = f'ffmpeg -y -i {video} -qscale:a 0 -ac 1 -vn -threads 6 -ar 16000 dataset/.waves/{uid}.wav -loglevel panic'
         subprocess.call(cmd, shell=True)
 
-        rttms = glob.glob(f'{dataset_path}/rttms/{uid}*.rttm')
+        rttms = glob.glob(f'dataset/rttms/{uid}*.rttm')
         for rttm in sorted(rttms):
             mins = 1e9
             maxs = -1
