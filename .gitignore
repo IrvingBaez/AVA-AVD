@@ -10,7 +10,7 @@ __pycache__
 *.pkl
 *.model
 *.out
-*.rttm
+# *.rttm
 *.pyc
 *.png
 *.pt
@@ -22,9 +22,9 @@ data/
 save/
 debug/
 scripts.sh
-dataset/tracks/
-dataset/labs/
-dataset/rttms/
+# dataset/tracks/
+# dataset/labs/
+# dataset/rttms/
 dataset/videos/
 dataset/waves/
 dataset/tracklets/
