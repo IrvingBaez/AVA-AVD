@@ -3,8 +3,8 @@ sys.path.append('.')
 import cv2, os
 import numpy as np
 from skimage import transform as trans
-from ..third_party.retinaface.retinaface.pre_trained_models import get_model
-# from retinaface.pre_trained_models import get_model
+# from ..third_party.retinaface.retinaface.pre_trained_models import get_model
+from retinaface.pre_trained_models import get_model
 
 src1 = np.array([[51.642, 50.115], [57.617, 49.990], [35.740, 69.007],
                  [51.157, 89.050], [57.025, 89.702]],
@@ -81,7 +81,10 @@ class face_aligner():
     def align_face(self, img, thresh=0.8):
         img = cv2.resize(img, (224, 224))
 
-        faces, landmarks = self.detector.predict_jsons(img, thresh)
+        predictions = self.detector.predict_jsons(img, thresh)
+        faces = [prediction['bbox'] for prediction in predictions]
+        landmarks = [prediction['landmarks'] for prediction in predictions]
+
         faces = faces.mean(axis=0)[None, :]
         landmarks = landmarks.mean(axis=0)[None, :]
 
