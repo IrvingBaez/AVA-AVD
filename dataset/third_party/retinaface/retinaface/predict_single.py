@@ -8,10 +8,10 @@ import torch
 from torch.nn import functional as F
 from torchvision.ops import nms
 
-from retinaface.box_utils import decode, decode_landm
-from retinaface.network import RetinaFace
-from retinaface.prior_box import priorbox
-from retinaface.utils import tensor_from_rgb_image
+from .box_utils import decode, decode_landm
+from .network import RetinaFace
+from .prior_box import priorbox
+from .utils import tensor_from_rgb_image
 
 ROUNDING_DIGITS = 2
 

@@ -5,7 +5,7 @@ from torch import nn
 from torchvision import models
 from torchvision.models import _utils
 
-from retinaface.net import FPN, SSH
+from .net import FPN, SSH
 
 
 class ClassHead(nn.Module):
