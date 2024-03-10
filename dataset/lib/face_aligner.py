@@ -3,7 +3,8 @@ sys.path.append('.')
 import cv2, os
 import numpy as np
 from skimage import transform as trans
-from retinaface.pre_trained_models import get_model
+from ..third_party.retinaface.retinaface.pre_trained_models import get_model
+# from retinaface.pre_trained_models import get_model
 
 src1 = np.array([[51.642, 50.115], [57.617, 49.990], [35.740, 69.007],
                  [51.157, 89.050], [57.025, 89.702]],
