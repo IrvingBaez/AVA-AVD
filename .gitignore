@@ -2,7 +2,7 @@
 *.npz
 *.npy
 *.h5
-*.jpg
+# *.jpg
 __pycache__
 .vscode/
 *.pth
