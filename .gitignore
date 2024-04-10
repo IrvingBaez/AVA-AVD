@@ -22,12 +22,10 @@ data/
 save/
 debug/
 scripts.sh
-# dataset/tracks/
-# dataset/labs/
-# dataset/rttms/
+dataset/tracks/
+dataset/labs/
+dataset/rttms/
 dataset/videos/
 dataset/waves/
 dataset/tracklets/
 dataset/aligned_tracklets/
-torch-1.0.0-cp37-cp37m-linux_x86_64.whl
-dataset/third_party/insightface/detection/retinaface/R50-0000.params

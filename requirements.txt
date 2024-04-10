@@ -1,10 +1,10 @@
-torchaudio==0.8.0
+# torchaudio==0.8.0
 intervaltree==3.0.2
-torchvision==0.9.0
+# torchvision==0.9.0
 pytorch_lightning
 iopath==0.1.8
-torch==1.8.0
-opencv_python_headless==4.5.1.48
+# torch==1.8.0 #1.9.0
+opencv-python-headless==4.1.2.30
 numpy==1.19.0
 SoundFile==0.10.3.post1
 omegaconf==2.0.6
