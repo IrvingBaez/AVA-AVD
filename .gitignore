@@ -2,7 +2,7 @@
 *.npz
 *.npy
 *.h5
-# *.jpg
+*.jpg
 __pycache__
 .vscode/
 *.pth
@@ -10,7 +10,7 @@ __pycache__
 *.pkl
 *.model
 *.out
-# *.rttm
+*.rttm
 *.pyc
 *.png
 *.pt
