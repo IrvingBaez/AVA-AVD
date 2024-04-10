@@ -1,6 +1,7 @@
 # Starting from the official CNTK docker image (based on
 # Ubuntu-16.04)
-FROM nvidia/cuda:10.1-cudnn8-runtime-ubuntu18.04
+# FROM nvidia/cuda:10.1-cudnn8-runtime-ubuntu18.04
+FROM nvidia/cuda:11.4.3-cudnn8-runtime-ubuntu18.04
 
 # Install packages.
 RUN apt-get update && \
@@ -14,7 +15,7 @@ RUN apt-get update && \
 RUN ln -s /usr/lib/x86_64-linux-gnu/libmpi_cxx.so.20 /usr/lib/x86_64-linux-gnu/libmpi_cxx.so.1 && \
     ln -s /usr/lib/x86_64-linux-gnu/libmpi.so.20.10.1 /usr/lib/x86_64-linux-gnu/libmpi.so.12 && \
     ldconfig
-    
+
 # Install Python 3.6.
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update && \
@@ -23,7 +24,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 0
 
 # Install Python packages.
 RUN pip3 install --upgrade pip && \
-    pip3 install numpy scipy librosa joblib webrtcvad wurlitzer cntk-gpu 
+    pip3 install numpy scipy librosa joblib webrtcvad wurlitzer cntk-gpu
 
 
 # Copy the repository inside the docker in /dihard18
