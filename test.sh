@@ -1,6 +1,6 @@
 export PYTHONPATH=./model
 export CUDA_VISIBLE_DEVICES=0
-clsp_grid_wrapper/submit_grid model/mmsc_exp/predict.py \
+clsp_grid_wrapper/submit_grid.sh model/mmsc_exp/predict.py \
   config=projects/token/avaavd.yaml \
   datasets=avaavd \
   model=token \
