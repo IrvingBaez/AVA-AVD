@@ -5,14 +5,14 @@ import random
 import typing
 
 import torch
-from mmsc.common.registry import registry
-from mmsc.utils.build import build_config, build_trainer
-from mmsc.utils.configuration import Configuration
-from mmsc.utils.distributed import distributed_init, get_rank, infer_init_method
-from mmsc.utils.env import set_seed, setup_imports
-from mmsc.utils.options import options
-from mmsc.utils.general import log_device_names
-from mmsc.utils.logger import setup_logger, setup_very_basic_config
+from model.mmsc.common.registry import registry
+from model.mmsc.utils.build import build_config, build_trainer
+from model.mmsc.utils.configuration import Configuration
+from model.mmsc.utils.distributed import distributed_init, get_rank, infer_init_method
+from model.mmsc.utils.env import set_seed, setup_imports
+from model.mmsc.utils.options import options
+from model.mmsc.utils.general import log_device_names
+from model.mmsc.utils.logger import setup_logger, setup_very_basic_config
 
 
 setup_very_basic_config()
