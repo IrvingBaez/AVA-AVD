@@ -18,7 +18,9 @@ conda activate ${env_name}
 # Check if PyTorch and torchvision are installed, if not, install them
 if ! conda list | grep -q "pytorch"
 then
-  conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=10.2 -c pytorch -y
+  conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=10.2 -c pytorch -y
+
+  # conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=10.2 -c pytorch -y
 fi
 
 # Install other dependencies

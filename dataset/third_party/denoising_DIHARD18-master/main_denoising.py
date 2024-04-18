@@ -241,7 +241,7 @@ def main_denoising(wav_files, output_dir, verbose=False, **kwargs):
     global_var = global_mean_var['global_var']
 
     # Perform speech enhancement.
-    for src_wav_file in wav_files:
+    for index, src_wav_file in enumerate(wav_files):
         # Perform basic checks of input WAV.
         if not os.path.exists(src_wav_file):
             utils.error('File "%s" does not exist. Skipping.' % src_wav_file)
@@ -266,7 +266,7 @@ def main_denoising(wav_files, output_dir, verbose=False, **kwargs):
             bn = os.path.basename(src_wav_file)
             dest_wav_file = os.path.join(output_dir, bn)
             denoise_wav(src_wav_file, dest_wav_file, global_mean, global_var, **kwargs)
-            print('Finished processing file "%s".' % src_wav_file)
+            print(f'Finished processing file "{src_wav_file}" ({index + 1}/{len(wav_files)}).')
         except Exception as e:
             msg = 'Problem encountered while processing file "%s". Skipping.' % src_wav_file
             if verbose:

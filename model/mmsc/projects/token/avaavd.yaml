@@ -4,7 +4,7 @@ includes:
 
 model_config:
   token:
-    base_ckpt_path: 'save/token/best_0.14_20.66.ckpt' # the initial parameters
+    base_ckpt_path: 'save/token/pretrained/best_0.14_20.66.ckpt' # the initial parameters
     base_ckpt_load_backbone_only: false
 
 evaluation:
@@ -13,7 +13,7 @@ evaluation:
   - type: der
     datasets:
       - avaavd
-    params: 
+    params:
       threshold: 0.14
       relation: true
       save_dir: ${env.save_dir}

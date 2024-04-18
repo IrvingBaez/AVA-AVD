@@ -1,8 +1,8 @@
-export PYTHONPATH=./model
+# export PYTHONPATH=./model
 export CUDA_VISIBLE_DEVICES=0
 clsp_grid_wrapper/submit_grid.sh model/mmsc_exp/run.py \
   config=projects/token/mix.yaml \
-  datasets=ava,voxceleb1,voxceleb2,avaavd \
+  datasets=ava,avaavd \
   model=token \
   run_type=train \
   training.batch_size=8 \

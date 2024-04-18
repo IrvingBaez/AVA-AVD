@@ -27,5 +27,6 @@ dataset/labs/
 dataset/rttms/
 dataset/videos/
 dataset/waves/
+dataset/denoised_waves/
 dataset/tracklets/
 dataset/aligned_tracklets/

@@ -10,7 +10,7 @@ WAV_DIR=/data  # Directory of WAV files (16 kHz, 16 bit) to enhance.
 SE_WAV_DIR=/data/wav_pn_enhanced  # Output directory for enhanced WAV.
 USE_GPU=true  # Use GPU instead of CPU. To instead use CPU, set to 'false'.
 GPU_DEVICE_ID=0  # Use GPU with device id 0. Irrelevant if using CPU.
-TRUNCATE_MINUTES=10  # Duration in minutes of chunks for enhancement. If you experience
+TRUNCATE_MINUTES=3  # Duration in minutes of chunks for enhancement. If you experience
                      # OOM errors with your GPU, try reducing this.
 python main_denoising.py \
        --verbose \
